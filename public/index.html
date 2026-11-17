@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noiz AI Studio V3 Pro · Text-to-Speech, Voice Clone & 15,612+ Voces (dbaeztts)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- =================================================================== -->
+    <!-- LEFT SIDEBAR NAVIGATION (EXACT NOIZ.AI STUDIO STRUCTURE)            -->
+    <!-- =================================================================== -->
+    <aside class="left-sidebar">
+      <div class="sidebar-brand" id="btnOpenVoiceModalTop">
+        <div class="logo-orb">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" x2="12" y1="19" y2="22"/>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <div class="brand-title-row">
+            <span class="brand-title">NOIZ<span class="brand-accent">.AI</span></span>
+            <span class="v3-badge">V3 PRO</span>
+          </div>
+          <span class="brand-subtitle">Estudio TTS · 15,612+ Voces ES</span>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">ESPACIO DE TRABAJO</div>
+        <button class="sidebar-nav-item active" data-view="studio">
+          <span class="nav-icon">🎙️</span>
+          <span>Text-to-Speech (Estudio)</span>
+        </button>
+        <button class="sidebar-nav-item" id="btnAddDialogueMode">
+          <span class="nav-icon">🎬</span>
+          <span>Diálogo Multi-Locutor</span>
+          <span class="nav-pill-tag">Nuevo</span>
+        </button>
+        <button class="sidebar-nav-item" id="btnOpenVoiceSelectorNav">
+          <span class="nav-icon">📚</span>
+          <span>Biblioteca de Voces</span>
+          <span class="nav-count" id="navTotalVoicesCount">561</span>
+        </button>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">PRODUCTOS IA</div>
+        <button class="sidebar-nav-item" id="btnOpenDesignerTop">
+          <span class="nav-icon">🧬</span>
+          <span>Clonar / Diseñar Voz</span>
+        </button>
+        <button class="sidebar-nav-item" id="btnOpenImportScriptSidebar">
+          <span class="nav-icon">📄</span>
+          <span>Importar Guion / Diálogo</span>
+        </button>
+        <button class="sidebar-nav-item" data-view="downloads">
+          <span class="nav-icon">📥</span>
+          <span>Descargas y Modelos ONNX</span>
+        </button>
+        <button class="sidebar-nav-item" id="btnOpenApiKeyModal">
+          <span class="nav-icon">🔑</span>
+          <span>API Key Noiz.ai</span>
+          <span id="apiKeyStatusBadge" class="nav-pill-tag">10k Gratis</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="firebase-status-card">
+          <div class="fb-row">
+            <span class="status-dot online"></span>
+            <span>Firebase: <strong>dbaeztts</strong></span>
+          </div>
+          <div class="fb-sub">243 Voces Reales Noiz + 56 Locutores Neuronales</div>
+        </div>
+
+        <div id="authContainer" class="auth-container">
+          <button id="btnGoogleLogin" class="btn-google-auth">
+            <svg width="16" height="16" viewBox="0 0 48 48">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span>Acceder con Google</span>
+          </button>
+          <div id="userProfileChip" class="user-profile-chip hidden">
+            <img id="userAvatarImg" src="" alt="Avatar" />
+            <span id="userNameLabel">Usuario</span>
+            <button id="btnLogout" class="btn-logout" title="Cerrar sesión">Salir</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =================================================================== -->
+    <!-- CENTER + RIGHT WORKSPACE                                            -->
+    <!-- =================================================================== -->
+    <div class="workspace-wrapper">
+      <!-- TOP STUDIO HEADER BAR -->
+      <header class="studio-topbar">
+        <div class="topbar-title-group">
+          <h1>Text-to-Speech</h1>
+          <span class="whats-new-pill" id="btnEmotionEnhanceTop">✨ Nuevo en V3: Etiquetas [Laugh], [Whisper], [Sigh] y Multi-Locutor</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn-topbar-tool" id="btnOpenImportScript">📄 Importar Guion</button>
+          <button class="btn-topbar-tool" id="btnEmotionEnhance">🎭 Auto-Emociones IA (Emotion Enhance)</button>
+          <button class="btn-topbar-tool" id="btnAddSpeakerBlock">➕ Añadir Párrafo / Locutor</button>
+          <button class="btn-topbar-tool accent" id="btnOpenModalHeader">🗣️ Explorar 15,612+ Voces ▾</button>
+        </div>
+      </header>
+
+      <!-- VIEW 1: PROFESSIONAL TTS CREATION STUDIO -->
+      <div id="view-studio" class="view-section active">
+        <div class="studio-columns">
+          <!-- CENTER COLUMN: MULTI-SPEAKER / EMOTION EDITOR -->
+          <div class="center-editor-pane">
+            <!-- Quick Age & Gender Selector Bar -->
+            <div class="quick-age-bar">
+              <div class="quick-bar-header">
+                <span class="quick-bar-label">🎯 Selección rápida por Edad y Género (Voces Reales Noiz.ai):</span>
+                <span class="quick-bar-hint">Haz clic para cambiar entre distintas voces de esa categoría</span>
+              </div>
+              <div class="quick-age-chips">
+                <button class="quick-age-btn" data-quick-age="Niño" data-quick-gender="Femenino">👧 Niña (47)</button>
+                <button class="quick-age-btn" data-quick-age="Niño" data-quick-gender="Masculino">👦 Niño (47)</button>
+                <button class="quick-age-btn" data-quick-age="Adolescente" data-quick-gender="Femenino">👱‍♀️ Adolescente F</button>
+                <button class="quick-age-btn" data-quick-age="Adolescente" data-quick-gender="Masculino">🧑 Adolescente M</button>
+                <button class="quick-age-btn" data-quick-age="Joven" data-quick-gender="Femenino">👩 Joven F (11)</button>
+                <button class="quick-age-btn" data-quick-age="Joven" data-quick-gender="Masculino">👨 Joven M (10)</button>
+                <button class="quick-age-btn" data-quick-age="Adulto" data-quick-gender="Femenino">👩‍💼 Adulta F (30)</button>
+                <button class="quick-age-btn" data-quick-age="Adulto" data-quick-gender="Masculino">👨‍💼 Adulto M (64)</button>
+                <button class="quick-age-btn" data-quick-age="Mayor" data-quick-gender="Femenino">👵 Mayor / Abuela (9)</button>
+                <button class="quick-age-btn" data-quick-age="Mayor" data-quick-gender="Masculino">👴 Mayor / Abuelo (11)</button>
+              </div>
+            </div>
+
+            <!-- V2 Emotions & V3 Expressive Tags Bar -->
+            <div class="expressive-toolbar">
+              <div class="toolbar-row">
+                <span class="toolbar-label">🎭 Emoción V2:</span>
+                <div id="v2EmotionChips" class="chips-scroll">
+                  <button class="emo-chip active" data-emo="" data-pitch-mod="0" data-rate-mod="0">Neutral</button>
+                  <button class="emo-chip" data-emo='{"Joy":0.85}' data-pitch-mod="6" data-rate-mod="5">😃 Alegre</button>
+                  <button class="emo-chip" data-emo='{"Sadness":0.9}' data-pitch-mod="-8" data-rate-mod="-10">😔 Triste</button>
+                  <button class="emo-chip" data-emo='{"Anger":0.85}' data-pitch-mod="-4" data-rate-mod="8">😡 Enojado</button>
+                  <button class="emo-chip" data-emo='{"Fear":0.85}' data-pitch-mod="10" data-rate-mod="6">😨 Temeroso</button>
+                  <button class="emo-chip" data-emo='{"Surprise":0.8,"Joy":0.4}' data-pitch-mod="12" data-rate-mod="7">😮 Sorpresa</button>
+                  <button class="emo-chip" data-emo='{"Joy":0.9,"Surprise":0.5}' data-pitch-mod="9" data-rate-mod="9">🔥 Emocionado</button>
+                  <button class="emo-chip" data-emo='{"Sadness":0.4,"Anger":0.5}' data-pitch-mod="-6" data-rate-mod="-5">🎭 Dramático</button>
+                  <button class="emo-chip" data-emo='{"Surprise":0.5}' data-pitch-mod="7" data-rate-mod="3">🤔 Curioso</button>
+                  <button class="emo-chip" data-emo='{"Sadness":0.3,"Joy":0.3}' data-pitch-mod="-2" data-rate-mod="-4">🤝 Empático</button>
+                </div>
+              </div>
+
+              <div class="toolbar-row">
+                <span class="toolbar-label">✨ Etiquetas V3 (Clic para insertar):</span>
+                <div id="v3TagChips" class="chips-scroll">
+                  <button class="v3-tag-chip" data-insert-tag="[Laugh]">😂 [Laugh]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Chuckles]">🤭 [Chuckles]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Giggle]">😆 [Giggle]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Sigh]">😮‍💨 [Sigh]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Whisper]">🤫 [Whisper]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Breathy]">💨 [Breathy]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Emphasis]">❗ [Emphasis]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Clear_throat]">喉 [Clear_throat]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Cough]">咳 [Cough]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Yawn]">🥱 [Yawn]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Sniffles]">😢 [Sniffles]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Groan]">😩 [Groan]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Panting]">😤 [Panting]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Pause 0.5s]">⏱️ [Pause 0.5s]</button>
+                  <button class="v3-tag-chip" data-insert-tag="[Pause 1.0s]">⏱️ [Pause 1.0s]</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Script Generator Templates Row -->
+            <div class="script-templates-bar">
+              <span class="templates-label">🪄 Guiones Profesionales:</span>
+              <button class="template-chip" data-template="coco" style="background:rgba(236,72,153,0.18); color:#fbcfe8; border-color:rgba(236,72,153,0.4); font-weight:700;">🙏 Oración / Liturgia (Voz Coco)</button>
+              <button class="template-chip" data-template="podcast">🎙️ Apertura de Podcast (Isabela)</button>
+              <button class="template-chip" data-template="kids">🎈 Cuento Infantil (Niño/Niña)</button>
+              <button class="template-chip" data-template="teen">⚡ TikTok / Streamer (Adolescente)</button>
+              <button class="template-chip" data-template="elder">🕰️ Sabiduría del Abuelo (Mayor)</button>
+              <button class="template-chip" data-template="horror">👻 El Señor del Terror (Suspenso)</button>
+              <button class="template-chip" data-template="dialogue">🎬 Diálogo Multi-Voz (Abuelo + Niña + Narrador)</button>
+            </div>
+
+            <!-- PRIMARY SPEAKER BLOCK + ADDITIONAL DIALOGUE BLOCKS -->
+            <div id="speakerBlocksContainer" class="speaker-blocks-container">
+              <!-- Main Primary Block -->
+              <div class="speaker-block-card active-block" data-block-index="0">
+                <div class="speaker-block-header">
+                  <div class="speaker-pill" id="btnChangeVoiceCard" title="Haz clic para cambiar la voz de este bloque">
+                    <img id="currentVoiceAvatar" src="https://noiz.ai/resource/img/tts/voice_clone_poster_6.jpg" alt="Voz" />
+                    <div class="speaker-pill-info">
+                      <div class="speaker-pill-top">
+                        <strong id="currentVoiceName">Coco</strong>
+                        <span id="currentVoiceIdBadge" class="voice-id-code">ID: c0750aac</span>
+                        <span id="currentVoiceAgeBadge" class="badge-pill age-badge">Mayor</span>
+                        <span id="currentVoiceGenderBadge" class="badge-pill gender-badge">Femenino</span>
+                      </div>
+                      <span id="currentVoiceSubtitle" class="speaker-pill-sub">Voz femenina serena, cálida y devota · Liturgia, Oración y Narración</span>
+                    </div>
+                    <span class="speaker-chevron">▾</span>
+                  </div>
+
+                  <div class="speaker-block-tools">
+                    <button type="button" class="btn-block-tool real-sample" id="btnPreviewOriginalNoiz" title="Escuchar la grabación original real de Coco en Noiz.ai">
+                      🔊 Muestra Original Coco (Noiz.ai)
+                    </button>
+                    <button type="button" class="btn-block-tool" id="btnPreviewCurrentVoice" title="Sintetizar frase de prueba con el motor">
+                      ▶ Probar Síntesis
+                    </button>
+                    <button type="button" class="btn-block-tool" id="btnDictateMic" title="Dictar texto con tu micrófono (Speech-to-Text)">
+                      🎤 Dictar
+                    </button>
+                  </div>
+                </div>
+
+                <div class="editor-wrapper">
+                  <textarea id="ttsTextInput" rows="6" placeholder="Escribe aquí tu guion. Escribe '[' o usa los botones de arriba para insertar etiquetas V3 como [Laugh], [Whisper] o [Sigh]...">María madre de gracias, madre de piedad y misericordia, en la vida y en la muerte ampáranos gran señora. Amén. Oh Jesús mío, perdona nuestras culpas y pecados, líbranos del fuego del infierno, lleva al cielo a todas las almas.</textarea>
+                  <div class="editor-footer">
+                    <div class="char-counter">
+                      <span id="charCount">172</span> / 5,000 caracteres · <span id="activeSpeakerEngineLabel" class="free-unlimited-tag">⚡ Locutor Asignado: es-CO-SalomeNeural (Noiz ID: b0a1531a)</span>
+                    </div>
+                    <div class="editor-actions-inline">
+                      <button id="btnUseVoicePrompt" class="btn-ghost-sm" title="Cargar la frase original de esta voz">Usar frase original de la voz</button>
+                      <button id="btnClearText" class="btn-ghost-sm">Limpiar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Extra Multi-Speaker Dialogue Container -->
+            <div id="dialogueBlocksList" class="dialogue-blocks-list"></div>
+
+            <!-- BOTTOM SPEAK IT / PRODUCTION BAR -->
+            <div class="production-footer-bar">
+              <div class="production-left-info">
+                <button id="btnAddAnotherSpeaker" class="btn-add-speaker">
+                  ➕ Añadir otro Locutor al Diálogo
+                </button>
+                <button id="btnOpenAudioFolder" class="btn-secondary-action" title="Abrir C:\db\Github\tts\descargas_audio">
+                  📂 Carpeta de Descargas
+                </button>
+              </div>
+
+              <div class="production-right-cta">
+                <button id="btnSynthesizeDialogue" class="btn-generate-dialogue hidden">
+                  🎬 Generar Diálogo Multi-Voz Completo
+                </button>
+                <button id="btnSynthesizeMain" class="btn-speak-it">
+                  <span class="speak-icon">🔊</span>
+                  <span id="btnSynthesizeText">Speak It · Generar Voz</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- MASTER AUDIO PLAYER & WAVEFORM VISUALIZER -->
+            <div id="audioResultCard" class="audio-result-card hidden">
+              <div class="audio-result-top">
+                <div class="audio-result-meta">
+                  <span id="resultSourceBadge" class="result-badge-ready">✓ Audio Listo</span>
+                  <strong id="resultVoiceTitle">Bienvenida (Isabela)</strong>
+                  <span id="resultFilePathLabel" class="result-filepath">C:\db\Github\tts\descargas_audio\...</span>
+                </div>
+                <div class="audio-download-buttons">
+                  <a id="btnDownloadMp3" href="#" download class="btn-download-pill mp3">
+                    ⬇ Descargar MP3
+                  </a>
+                  <button id="btnDownloadWavDsp" type="button" class="btn-download-pill wav">
+                    ⬇ Descargar WAV (48kHz + DSP)
+                  </button>
+                </div>
+              </div>
+
+              <div class="waveform-player-row">
+                <button id="btnPlayPauseResult" class="btn-play-circle">▶</button>
+                <canvas id="waveformCanvas" width="640" height="56"></canvas>
+                <audio id="mainAudioElement" crossorigin="anonymous"></audio>
+                <span id="audioTimeLabel" class="audio-time-label">00:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: SETTINGS & HISTORY INSPECTOR (EXACT NOIZ.AI RIGHT PANEL) -->
+          <aside class="right-inspector-pane">
+            <div class="inspector-tabs">
+              <button class="inspector-tab active" data-inspector-tab="settings">⚙️ Ajustes (Settings)</button>
+              <button class="inspector-tab" data-inspector-tab="history">🕒 Historial (<span id="historyCountBadge">0</span>)</button>
+            </div>
+
+            <!-- TAB 1: SETTINGS -->
+            <div id="inspector-settings" class="inspector-tab-content active">
+              <div class="inspector-shortcuts">
+                <button class="shortcut-btn" id="btnShortcutClone">🧬 Voice Clone</button>
+                <button class="shortcut-btn" id="btnShortcutDesign">✨ Voice Design</button>
+              </div>
+
+              <!-- Active Voice Mini Card -->
+              <div class="inspector-section">
+                <label class="inspector-label">Voz Seleccionada</label>
+                <div class="inspector-voice-card" id="btnOpenModalMain">
+                  <img id="inspectorVoiceImg" src="https://noiz.ai/resource/img/tts/final_es_podcast_open.webp" alt="Voz" />
+                  <div class="inspector-voice-meta">
+                    <strong id="inspectorVoiceName">Bienvenida (Isabela)</strong>
+                    <span id="inspectorVoiceTags">Español · Joven · Femenino</span>
+                  </div>
+                  <span class="inspector-change-btn">Cambiar ▸</span>
+                </div>
+              </div>
+
+              <!-- Model Selector (Natural Fidelity-v3, Emotion Engine-v2, Voice Fidelity-v1) -->
+              <div class="inspector-section">
+                <label class="inspector-label">Modelo Noiz AI (`model_id`)</label>
+                <div class="model-selector-cards" id="modelSelectorCards">
+                  <div class="model-option-card active" data-model-id="v3">
+                    <div class="model-option-top">
+                      <strong>Natural Fidelity-v3</strong>
+                      <span class="badge-new">New · 48kHz</span>
+                    </div>
+                    <p>Máximo realismo profesional. Soporta etiquetas [Laugh], [Whisper], [Sigh].</p>
+                  </div>
+                  <div class="model-option-card" data-model-id="v2">
+                    <div class="model-option-top">
+                      <strong>Emotion Engine-v2</strong>
+                      <span class="badge-default">Default</span>
+                    </div>
+                    <p>Rango emocional superior y control de intensidad emocional.</p>
+                  </div>
+                  <div class="model-option-card" data-model-id="v1">
+                    <div class="model-option-top">
+                      <strong>Voice Fidelity-v1</strong>
+                      <span class="badge-classic">v1</span>
+                    </div>
+                    <p>Acústica precisa que preserva el timbre original.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Synthesis Engine Mode -->
+              <div class="inspector-section">
+                <label class="inspector-label" for="engineModeSelect">Motor de Síntesis</label>
+                <select id="engineModeSelect" class="studio-select">
+                  <option value="auto">⚡ Automático (Noiz Cloud + 56 Locutores Locales)</option>
+                  <option value="local-neural">💻 Local Ilimitado (56 Locutores + Timbre Único)</option>
+                  <option value="noiz-cloud">☁️ Noiz.ai Cloud API (/v1/text-to-speech)</option>
+                  <option value="noiz-guest">🌐 Noiz.ai Guest API (/v1/guest/text-to-speech)</option>
+                </select>
+              </div>
+
+              <!-- Emotional Intensity Slider -->
+              <div class="inspector-section" id="emotionalIntensityGroup">
+                <div class="control-label-row">
+                  <label for="emoIntensityRange">Intensidad Emocional</label>
+                  <span id="emoIntensityLabel">Alta (0.8)</span>
+                </div>
+                <input type="range" id="emoIntensityRange" min="10" max="100" value="80" step="5" />
+                <div class="range-marks">
+                  <span>Baja (Low)</span>
+                  <span>Media</span>
+                  <span>Alta (High)</span>
+                </div>
+              </div>
+
+              <!-- Pacing / Speed Slider -->
+              <div class="inspector-section">
+                <div class="control-label-row">
+                  <label for="rateRange">Ritmo / Pacing (`speed`)</label>
+                  <span id="rateValueLabel">1.00x (+0%)</span>
+                </div>
+                <input type="range" id="rateRange" min="-40" max="50" value="0" step="1" />
+                <div class="range-marks">
+                  <span>0.6x Lento</span>
+                  <span>1.0x Normal</span>
+                  <span>1.5x Rápido</span>
+                </div>
+              </div>
+
+              <!-- Pitch / Timbre Slider -->
+              <div class="inspector-section">
+                <div class="control-label-row">
+                  <label for="pitchRange">Tono y Edad Vocal (`pitch`)</label>
+                  <span id="pitchValueLabel">+0Hz</span>
+                </div>
+                <input type="range" id="pitchRange" min="-45" max="55" value="0" step="1" />
+                <div class="range-marks">
+                  <span>Mayor/Grave (-45Hz)</span>
+                  <span>0Hz</span>
+                  <span>Niño/Agudo (+55Hz)</span>
+                </div>
+              </div>
+
+              <!-- Acoustic Filter / DSP Profile -->
+              <div class="inspector-section">
+                <label class="inspector-label" for="dspProfileSelect">Filtro Acústico y Timbre DSP</label>
+                <select id="dspProfileSelect" class="studio-select">
+                  <option value="natural">🎙️ Studio (Estudio Original)</option>
+                  <option value="child">🎈 Timbre Infantil (Niño / Niña)</option>
+                  <option value="teen">⚡ Juvenil / Adolescente Brillante</option>
+                  <option value="warm">🔥 Cálido / Podcast Íntimo</option>
+                  <option value="broadcast">📻 Radio / Locutor Profundo</option>
+                  <option value="elder">🕰️ Persona Mayor / Abuelo(a)</option>
+                  <option value="horror">👻 Hall / Terror con Reverberación</option>
+                  <option value="telephone">📞 Efecto Teléfono</option>
+                </select>
+              </div>
+
+              <!-- Output Format & Checkboxes -->
+              <div class="inspector-section">
+                <div class="output-format-row">
+                  <label class="inspector-label">Formato de Salida (`output_format`)</label>
+                  <div class="format-pills">
+                    <button type="button" class="format-pill active" data-format="mp3">.MP3</button>
+                    <button type="button" class="format-pill" data-format="wav">.WAV</button>
+                  </div>
+                </div>
+                <div class="inspector-toggles">
+                  <label class="toggle-row">
+                    <input type="checkbox" id="chkSimilarityEnh" checked />
+                    <span>Realzar similitud de voz (`similarity_enh`)</span>
+                  </label>
+                  <label class="toggle-row">
+                    <input type="checkbox" id="chkTrimSilence" />
+                    <span>Recortar silencios (`trim_silence`)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: HISTORY & LOCAL FOLDERS -->
+            <div id="inspector-history" class="inspector-tab-content">
+              <div class="local-paths-box">
+                <div class="path-item">
+                  <span class="path-label">🎵 Audios Generados:</span>
+                  <code id="pathAudioDir">C:\db\Github\tts\descargas_audio</code>
+                  <button class="btn-open-dir-mini" data-folder="audio">Abrir en Windows</button>
+                </div>
+                <div class="path-item">
+                  <span class="path-label">🗣️ Voces Originales Descargadas:</span>
+                  <code id="pathVoicesDir">C:\db\Github\tts\voces_descargadas</code>
+                  <button class="btn-open-dir-mini" data-folder="voices">Abrir en Windows</button>
+                </div>
+                <div class="path-item">
+                  <span class="path-label">🧠 Modelos ONNX Offline:</span>
+                  <code id="pathModelsDir">C:\db\Github\tts\modelos_onnx</code>
+                  <button class="btn-open-dir-mini" data-folder="models">Abrir en Windows</button>
+                </div>
+              </div>
+
+              <div id="historyList" class="history-list">
+                <p class="empty-hint">Tus audios generados aparecerán aquí con descarga directa.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- VIEW 2: DOWNLOAD CENTER (VOCES REALES NOIZ & MODELOS ONNX) -->
+      <section id="view-downloads" class="view-section">
+        <div class="downloads-container">
+          <div class="downloads-header-banner">
+            <div>
+              <h2>📥 Centro de Descarga de Voces Originales Noiz.ai y Modelos Locales</h2>
+              <p>Descarga los archivos de audio originales (<code>.wav</code> / <code>.mp3</code>) de las voces de <strong>noiz.ai</strong> por edad y género, o los modelos neuronales ONNX completos directamente a tu disco duro en <code>C:\db\Github\tts</code>.</p>
+            </div>
+            <div class="downloads-banner-actions">
+              <button class="btn-secondary-action" data-folder="voices">📂 Abrir carpeta de Voces</button>
+              <button class="btn-secondary-action" data-folder="models">📂 Abrir carpeta de Modelos ONNX</button>
+            </div>
+          </div>
+
+          <div class="download-packs-section">
+            <h3>1. Descargar Paquetes de Voces Reales de Noiz.ai por Edad y Género</h3>
+            <p class="section-sub">Descarga las grabaciones reales originales de Noiz.ai y sus perfiles JSON en <code>C:\db\Github\tts\voces_descargadas\</code>:</p>
+            <div class="packs-grid">
+              <div class="pack-card">
+                <div class="pack-icon">👧👦</div>
+                <h4>Pack Voces de Niños y Niñas (94 voces)</h4>
+                <p>Incluye Sandro · LatAm Boy, Mikel · Spain Boy, Fernanda · LatAm Girl, Itarte · Spain Girl, Anya Forger, El Niño Maravilla y más.</p>
+                <button class="btn-download-pack-batch" data-pack-age="Niño">⬇ Descargar Pack Niños en mi PC</button>
+              </div>
+              <div class="pack-card">
+                <div class="pack-icon">🧑👱‍♀️</div>
+                <h4>Pack Voces de Adolescentes (14 voces)</h4>
+                <p>Incluye The Student (Mateo), The Gamer (Fernan), The Hero (Peter Parker), Zelda Latino, El Estudiante (Sebastián) y más.</p>
+                <button class="btn-download-pack-batch" data-pack-age="Adolescente">⬇ Descargar Pack Adolescentes en mi PC</button>
+              </div>
+              <div class="pack-card">
+                <div class="pack-icon">👩👨</div>
+                <h4>Pack Voces Jóvenes y Destacadas (21 voces)</h4>
+                <p>Incluye Bienvenida (Isabela), Pasión (Inma), Sebastián, Lulu, FER, Isabel y más.</p>
+                <button class="btn-download-pack-batch" data-pack-age="Joven">⬇ Descargar Pack Jóvenes en mi PC</button>
+              </div>
+              <div class="pack-card">
+                <div class="pack-icon">👩‍💼👨‍💼</div>
+                <h4>Pack Voces Adultos y Personajes (94 voces)</h4>
+                <p>Incluye Energía (Mateo), Impulso (Miguel), Descubrimiento (Andrés), Gato con Botas, Melancolía (Rodrigo), La Doctora Líder, Homero Simpson y más.</p>
+                <button class="btn-download-pack-batch" data-pack-age="Adulto">⬇ Descargar Pack Adultos en mi PC</button>
+              </div>
+              <div class="pack-card">
+                <div class="pack-icon">👵👴</div>
+                <h4>Pack Voces de Mayores / Abuelos (20 voces)</h4>
+                <p>Incluye Don Carlos la Voz Porteña, La Abuela (Elena), El Abuelo Entusiasta, Santa Claus, El Señor del Terror, Alfred el Sabio Mayordomo y más.</p>
+                <button class="btn-download-pack-batch" data-pack-age="Mayor">⬇ Descargar Pack Mayores en mi PC</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="download-models-section">
+            <h3>2. Descargar Modelos Neuronales Open-Source 100% Offline (Hugging Face ONNX)</h3>
+            <p class="section-sub">Descarga los archivos <code>.onnx</code> y <code>.onnx.json</code> de Piper TTS y Kokoro-82M directamente a <code>C:\db\Github\tts\modelos_onnx\</code>:</p>
+            <div id="onnxModelsGrid" class="models-grid"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL SELECCIONAR VOZ (EXACTO A LAS CAPTURAS DE NOIZ.AI + 15,612 VOCES)   -->
+  <!-- ========================================================================= -->
+  <div id="voiceSelectorModal" class="noiz-modal-backdrop hidden">
+    <div class="noiz-modal-dialog">
+      <div class="noiz-modal-header">
+        <div class="modal-header-left">
+          <h2>Seleccionar voz</h2>
+          <span class="live-noiz-pill">🟢 Conectado al Catálogo Oficial de Noiz.ai (15,612+ Voces ES)</span>
+        </div>
+        <button id="btnCloseVoiceModal" class="noiz-close-btn" title="Cerrar">✕</button>
+      </div>
+
+      <!-- Tabs + Clone/Design Button Row -->
+      <div class="noiz-tabs-row">
+        <div class="noiz-tabs-left">
+          <button class="noiz-tab active" data-modal-tab="explore">Explorar</button>
+          <button class="noiz-tab" data-modal-tab="my-voices">Mi voz <span id="myVoicesCountBadge" class="mini-count">0</span></button>
+          <button class="noiz-tab" data-modal-tab="favorites">Favoritos <span id="favVoicesCountBadge" class="mini-count">6</span></button>
+        </div>
+
+        <button id="btnOpenVoiceDesigner" class="noiz-clone-btn">
+          <span class="clone-badges">
+            <span class="clone-icon-purple">🧬</span>
+            <span class="clone-icon-green">✨</span>
+          </span>
+          <span>Clonar o diseñar una voz</span>
+        </button>
+      </div>
+
+      <!-- Search Input + Live Search Button + Filtrar -->
+      <div class="noiz-search-row">
+        <div class="noiz-search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="voiceSearchInput" placeholder="Buscar entre las 15,612 voces de Noiz.ai (ej. Isabela, Gato con Botas, Homero, Terror, Niño, Abuela, Ferxxo, Anya)..." />
+          <button id="btnClearSearch" class="btn-clear-search hidden">✕</button>
+        </div>
+        <button id="btnSearchLiveNoiz" class="btn-live-noiz-search" title="Consultar directamente el servidor de Noiz.ai en tiempo real">
+          🌐 Buscar en Noiz.ai Live
+        </button>
+        <button id="btnResetFilters" class="noiz-filter-btn" title="Restablecer todos los filtros">
+          <span>⚙️ Filtrar</span>
+        </button>
+      </div>
+
+      <!-- Filter Pills Row (Exact Dropdowns from Screenshots: Idioma, Género, Edad + Style Chips) -->
+      <div class="noiz-filters-bar">
+        <div class="noiz-select-pill-wrap">
+          <select id="filterLanguage" class="noiz-select-pill">
+            <option value="es">Español (243 Reales Noiz + 45 Nativas)</option>
+            <option value="all">Todos los idiomas (561 locales + 50k Live)</option>
+            <option value="multi">Multilingüe HD (11)</option>
+            <option value="en">Inglés (EN)</option>
+            <option value="pt">Portugués (PT)</option>
+            <option value="fr">Francés (FR)</option>
+            <option value="ja">Japonés (JA)</option>
+            <option value="ko">Coreano (KO)</option>
+          </select>
+        </div>
+
+        <div class="noiz-select-pill-wrap">
+          <select id="filterGender" class="noiz-select-pill">
+            <option value="all">Género</option>
+            <option value="Femenino">Femenino (Mujer / Niña)</option>
+            <option value="Masculino">Masculino (Hombre / Niño)</option>
+          </select>
+        </div>
+
+        <div class="noiz-select-pill-wrap">
+          <select id="filterAge" class="noiz-select-pill">
+            <option value="all">Edad</option>
+            <option value="Niño">Niño / Infantil (94)</option>
+            <option value="Adolescente">Adolescente (14)</option>
+            <option value="Joven">Joven (21)</option>
+            <option value="Adulto">Adulto (94)</option>
+            <option value="Mayor">Mayor / Anciano (20)</option>
+          </select>
+        </div>
+
+        <span class="filter-divider"></span>
+
+        <button class="noiz-style-chip" data-style="Suave">Suave</button>
+        <button class="noiz-style-chip" data-style="Profundo">Profundo</button>
+        <button class="noiz-style-chip" data-style="Cálido">Cálido</button>
+        <button class="noiz-style-chip" data-style="Tranquilo">Tranquilo</button>
+        <button class="noiz-style-chip" data-style="Enérgico">Enérgico</button>
+      </div>
+
+      <!-- Quick Age Filter Pills inside Modal -->
+      <div class="noiz-age-quick-pills">
+        <button class="age-pill active" data-age-pill="all">Todas las edades (243+ Reales Noiz)</button>
+        <button class="age-pill" data-age-pill="Niño">🎈 Niños y Niñas (94)</button>
+        <button class="age-pill" data-age-pill="Adolescente">⚡ Adolescentes (14)</button>
+        <button class="age-pill" data-age-pill="Joven">✨ Jóvenes (21)</button>
+        <button class="age-pill" data-age-pill="Adulto">🎙️ Adultos (94)</button>
+        <button class="age-pill" data-age-pill="Mayor">🕰️ Mayores / Abuelos (20)</button>
+      </div>
+
+      <!-- Scrollable Modal Body -->
+      <div class="noiz-modal-body">
+        <!-- Voces Destacadas Section (Exact 4 Cards: Bienvenida Isabela, Pasión Inma, Energía Mateo, Sebastián) -->
+        <div id="featuredSection" class="noiz-section">
+          <div class="noiz-section-header">
+            <h3>Voces destacadas</h3>
+            <button id="btnSeeAllVoices" class="noiz-see-all">Ver todo (15,612+) &gt;</button>
+          </div>
+          <div id="featuredCardsRow" class="noiz-featured-row"></div>
+        </div>
+
+        <!-- Main Filtered Voices Grid -->
+        <div class="noiz-section">
+          <div class="noiz-section-header">
+            <h3 id="voicesGridHeading">Biblioteca de voces de Noiz.ai (<span id="filteredVoicesCount">243</span>)</h3>
+            <div style="display:flex; gap:8px;">
+              <button id="btnLoadMoreLiveNoiz" class="btn-live-noiz-search">
+                ➕ Cargar más voces desde Noiz.ai
+              </button>
+              <button id="btnDownloadVisibleVoices" class="btn-download-filtered">
+                ⬇ Descargar audios originales de esta vista en mi PC
+              </button>
+            </div>
+          </div>
+          <div id="voicesGridContainer" class="noiz-voices-grid"></div>
+        </div>
+
+        <!-- Recién añadidas Section -->
+        <div id="recentSection" class="noiz-section">
+          <div class="noiz-section-header">
+            <h3>Recién añadidas</h3>
+            <span class="noiz-see-all">Personajes y Video Social &gt;</span>
+          </div>
+          <div id="recentVoicesGrid" class="noiz-voices-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL IMPORTAR GUION / DIÁLOGO MULTI-LOCUTOR                              -->
+  <!-- ========================================================================= -->
+  <div id="importScriptModal" class="noiz-modal-backdrop hidden">
+    <div class="noiz-modal-dialog designer-dialog">
+      <div class="noiz-modal-header">
+        <h2>📄 Importar Guion o Diálogo Multi-Locutor</h2>
+        <button id="btnCloseImportModal" class="noiz-close-btn">✕</button>
+      </div>
+      <div class="designer-body">
+        <p class="designer-intro">Pega un guion con formato <code>Nombre: texto</code> (por ejemplo: <code>Niño: ¡Hola abuelo!</code> en una línea y <code>Abuelo: Hola hijo mío</code> en otra) y el estudio asignará automáticamente voces distintas de la edad y género correspondientes a cada bloque.</p>
+        <textarea id="importScriptTextarea" rows="8" class="import-textarea" placeholder="Isabela: Bienvenidos a nuestro programa especial de hoy.&#10;Niño: ¡Hola a todos! Yo quiero contarles mi parte favorita del cuento.&#10;Abuelo: Con calma pequeño, que las mejores historias se cuentan despacio."></textarea>
+        <div class="designer-actions">
+          <button id="btnProcessImportedScript" type="button" class="btn-speak-it" style="width:100%; justify-content:center;">
+            🎬 Crear Bloques de Diálogo con Voces Automáticas
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL API KEY DE NOIZ.AI (10,000 CRÉDITOS GRATIS)                         -->
+  <!-- ========================================================================= -->
+  <div id="apiKeyModal" class="noiz-modal-backdrop hidden">
+    <div class="noiz-modal-dialog designer-dialog">
+      <div class="noiz-modal-header">
+        <h2>🔑 Conectar API Key Oficial de Noiz.ai</h2>
+        <button id="btnCloseApiKeyModal" class="noiz-close-btn">✕</button>
+      </div>
+      <div class="designer-body">
+        <p class="designer-intro">
+          Tu estudio ya incluye las <strong>243 voces reales de Noiz.ai</strong> (con sus audios originales) y <strong>56 locutores neuronales gratuitos ilimitados</strong>. Si además quieres que el servidor sintetice texto nuevo clonando exactamente cualquiera de los <strong>15,612 <code>voice_id</code> de Noiz.ai</strong> con el modelo <code>Natural Fidelity-v3</code>:
+        </p>
+        <ol style="font-size:0.84rem; color:#cbd5e1; padding-left:20px; line-height:1.7;">
+          <li>Entra en <a href="https://developers.noiz.ai" target="_blank" rel="noopener" style="color:#a78bfa;">https://developers.noiz.ai</a> e inicia sesión con tu cuenta de Google (recibes <strong>10,000 créditos gratis</strong> sin tarjeta).</li>
+          <li>Ve a <strong>API Keys</strong> en el menú izquierdo y pulsa <strong>"Create API Key"</strong>.</li>
+          <li>Pega tu clave aquí abajo y quedará guardada en tu servidor local:</li>
+        </ol>
+        <div class="form-field full-width">
+          <label>Tu API Key de Noiz.ai (`Authorization`)</label>
+          <input type="text" id="noizApiKeyInput" placeholder="Pega aquí tu clave (ej. MzhiZTY2...)" />
+        </div>
+        <div class="designer-actions">
+          <button id="btnSaveApiKey" type="button" class="btn-speak-it" style="width:100%; justify-content:center;">
+            💾 Guardar API Key en Servidor Local
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL CLONAR O DISEÑAR UNA VOZ                                            -->
+  <!-- ========================================================================= -->
+  <div id="voiceDesignerModal" class="noiz-modal-backdrop hidden">
+    <div class="noiz-modal-dialog designer-dialog">
+      <div class="noiz-modal-header">
+        <h2>🧬 ✨ Clonar o diseñar una nueva voz</h2>
+        <button id="btnCloseDesignerModal" class="noiz-close-btn">✕</button>
+      </div>
+      <div class="designer-body">
+        <p class="designer-intro">Crea una voz a medida combinando cualquier timbre base con edad (Niño, Adolescente, Joven, Adulto o Mayor), género y modulación acústica. Se guardará en tu cuenta de Firebase (<strong>dbaeztts</strong>) y en tu disco local.</p>
+
+        <div class="designer-form-grid">
+          <div class="form-field">
+            <label>Nombre de tu nueva voz</label>
+            <input type="text" id="designVoiceName" placeholder="Ej. Abuelo Cuentacuentos, Niña Estelar..." />
+          </div>
+
+          <div class="form-field">
+            <label>Descripción / Estilo</label>
+            <input type="text" id="designVoiceSubtitle" placeholder="Ej. Voz cálida para audiolibros..." />
+          </div>
+
+          <div class="form-field">
+            <label>Género</label>
+            <select id="designVoiceGender" class="studio-select">
+              <option value="Femenino">Femenino (Mujer / Niña)</option>
+              <option value="Masculino">Masculino (Hombre / Niño)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Grupo de Edad</label>
+            <select id="designVoiceAge" class="studio-select">
+              <option value="Niño">🎈 Niño / Infantil</option>
+              <option value="Adolescente">⚡ Adolescente</option>
+              <option value="Joven">✨ Joven</option>
+              <option value="Adulto" selected>🎙️ Adulto</option>
+              <option value="Mayor">🕰️ Mayor / Anciano</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Locutor Neuronal Base (56 Timbres Distintos)</label>
+            <select id="designBaseVoiceSelect" class="studio-select"></select>
+          </div>
+
+          <div class="form-field">
+            <label>Perfil Acústico DSP</label>
+            <select id="designDspProfile" class="studio-select">
+              <option value="natural">Studio Natural</option>
+              <option value="child">Infantil (Niño/Niña)</option>
+              <option value="teen">Adolescente Brillante</option>
+              <option value="warm">Cálido / Podcast</option>
+              <option value="elder">Mayor / Anciano</option>
+              <option value="horror">Profundo / Terror</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Ajuste de Tono (Pitch): <span id="designPitchLabel">+0Hz</span></label>
+            <input type="range" id="designPitchRange" min="-40" max="50" value="0" />
+          </div>
+
+          <div class="form-field">
+            <label>Ajuste de Velocidad (Rate): <span id="designRateLabel">+0%</span></label>
+            <input type="range" id="designRateRange" min="-30" max="40" value="0" />
+          </div>
+        </div>
+
+        <div class="form-field full-width">
+          <label>Frase de muestra para probar tu voz</label>
+          <input type="text" id="designSampleText" value="Hola, esta es mi nueva voz personalizada creada en Noiz Studio Pro." />
+        </div>
+
+        <div class="designer-actions">
+          <button id="btnTestDesignedVoice" type="button" class="btn-secondary-action">▶ Probar voz diseñada</button>
+          <button id="btnSaveDesignedVoice" type="button" class="btn-speak-it">💾 Guardar en "Mi voz" (Local + Firebase)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

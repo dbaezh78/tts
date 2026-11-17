@@ -1,0 +1,26 @@
+{
+  "id": "noiz-andres",
+  "name": "Descubrimiento (Andrés)",
+  "subtitle": "Documentales, ciencia y exploración",
+  "shortName": "es-GT-AndresNeural",
+  "language": "es",
+  "locale": "es-GT",
+  "country": "Latinoamérica",
+  "flag": "🇬🇹",
+  "gender": "Masculino",
+  "age": "Joven",
+  "styles": [
+    "Cálido",
+    "Tranquilo"
+  ],
+  "category": "popular",
+  "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=80",
+  "pitch": "+0Hz",
+  "rate": "+0%",
+  "dspProfile": "natural",
+  "plays": "2.8k",
+  "likes": 31,
+  "sampleText": "En lo más profundo del océano existen misterios que la ciencia apenas comienza a comprender.",
+  "downloadedAt": "2026-11-17T20:42:58.704Z",
+  "localSampleMp3": "C:\\db\\Github\\tts\\voces_descargadas\\noiz-andres_muestra.mp3"
+}

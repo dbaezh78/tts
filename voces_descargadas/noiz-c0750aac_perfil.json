@@ -1,0 +1,54 @@
+{
+  "id": "noiz-c0750aac",
+  "noizVoiceId": "c0750aac",
+  "name": "Coco",
+  "displayNameClean": "Coco",
+  "subtitle": "Voz femenina serena, cálida y devota · Liturgia, Oración y Narración",
+  "shortName": "es-ES-ElviraNeural",
+  "language": "es",
+  "locale": "es-ES",
+  "country": "España",
+  "flag": "🇪🇸",
+  "gender": "Femenino",
+  "age": "Mayor",
+  "styles": [
+    "Suave",
+    "Cálido",
+    "Tranquilo"
+  ],
+  "labels": [
+    "Calm",
+    "Joyful",
+    "Social Video",
+    "Warm",
+    "Conversational",
+    "Friendly",
+    "Soft",
+    "Storytelling",
+    "Lifestyle"
+  ],
+  "scene": [
+    "Social Video"
+  ],
+  "emotion": [
+    "Calm",
+    "Joyful"
+  ],
+  "category": "featured",
+  "featuredImage": "https://noiz.ai/resource/img/tts/voice_clone_poster_16.jpg",
+  "avatar": "https://noiz.ai/resource/img/tts/voice_clone_poster_16.jpg",
+  "realAudioUrl": "/voces_descargadas/coco_original_liturgia.mp3",
+  "fallbackAudioUrl": "https://noiz.ai/api/v2/fallbackurls/1773994_5c9382WhatsApp Audio 2026-08-26 at 8_44_23 PM_wav/c0750aac",
+  "filePath": "1773994_5c9382WhatsApp Audio 2026-08-26 at 8.44.23 PM.wav",
+  "pitch": "-5Hz",
+  "rate": "-8%",
+  "dspProfile": "warm",
+  "plays": "28.4k",
+  "likes": 312,
+  "isRealNoiz": true,
+  "voiceType": "custom",
+  "sampleText": "María madre de gracias, madre de piedad y misericordia, en la vida y en la muerte ampáranos gran señora. Amén. Oh Jesús mío, perdona nuestras culpas y pecados, líbranos del fuego del infierno, lleva al cielo a todas las almas.",
+  "downloadedRealNoizAudio": false,
+  "downloadedAt": "2026-11-17T22:22:47.893Z",
+  "localAudioFile": "C:\\db\\Github\\tts\\voces_descargadas\\noiz-c0750aac_muestra.mp3"
+}

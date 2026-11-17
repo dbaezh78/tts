@@ -1,0 +1,26 @@
+{
+  "id": "noiz-miguel",
+  "name": "Impulso (Miguel)",
+  "subtitle": "Narrador corporativo y motivacional",
+  "shortName": "es-ES-AlvaroNeural",
+  "language": "es",
+  "locale": "es-ES",
+  "country": "España",
+  "flag": "🇪🇸",
+  "gender": "Masculino",
+  "age": "Adulto",
+  "styles": [
+    "Enérgico",
+    "Profundo"
+  ],
+  "category": "popular",
+  "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80",
+  "pitch": "-2Hz",
+  "rate": "+4%",
+  "dspProfile": "broadcast",
+  "plays": "4.7k",
+  "likes": 22,
+  "sampleText": "Cada paso cuenta cuando tienes clara tu meta. Prepárate para descubrir todo tu potencial.",
+  "downloadedAt": "2026-11-17T20:42:56.931Z",
+  "localSampleMp3": "C:\\db\\Github\\tts\\voces_descargadas\\noiz-miguel_muestra.mp3"
+}

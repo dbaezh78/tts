@@ -1,0 +1,28 @@
+{
+  "id": "noiz-inma",
+  "name": "Pasión (Inma)",
+  "subtitle": "Voz íntima, profunda y cinematográfica",
+  "shortName": "es-ES-XimenaNeural",
+  "language": "es",
+  "locale": "es-ES",
+  "country": "España",
+  "flag": "🇪🇸",
+  "gender": "Femenino",
+  "age": "Adulto",
+  "styles": [
+    "Suave",
+    "Profundo",
+    "Cálido"
+  ],
+  "category": "featured",
+  "featuredImage": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+  "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80",
+  "pitch": "-6Hz",
+  "rate": "-4%",
+  "dspProfile": "intimate",
+  "plays": "19.8k",
+  "likes": 245,
+  "sampleText": "Hay palabras que no solo se escuchan, se sienten en cada pausa y en cada suspiro de la noche.",
+  "downloadedAt": "2026-11-17T20:42:52.166Z",
+  "localSampleMp3": "C:\\db\\Github\\tts\\voces_descargadas\\noiz-inma_muestra.mp3"
+}

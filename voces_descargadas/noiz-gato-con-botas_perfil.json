@@ -1,0 +1,27 @@
+{
+  "id": "noiz-gato-con-botas",
+  "name": "Gato con Botas",
+  "subtitle": "Héroe legendario con acento español",
+  "shortName": "es-ES-AlvaroNeural",
+  "language": "es",
+  "locale": "es-ES",
+  "country": "España",
+  "flag": "🇪🇸",
+  "gender": "Masculino",
+  "age": "Adulto",
+  "styles": [
+    "Profundo",
+    "Cálido",
+    "Enérgico"
+  ],
+  "category": "popular",
+  "avatar": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&auto=format&fit=crop&q=80",
+  "pitch": "-12Hz",
+  "rate": "-3%",
+  "dspProfile": "heroic",
+  "plays": "903",
+  "likes": 2,
+  "sampleText": "¡Temedme, si os atrevéis! Porque el legendario héroe nunca retrocede ante ningún peligro.",
+  "downloadedAt": "2026-11-17T20:43:01.658Z",
+  "localSampleMp3": "C:\\db\\Github\\tts\\voces_descargadas\\noiz-gato-con-botas_muestra.mp3"
+}
